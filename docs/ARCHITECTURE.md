@@ -3,6 +3,7 @@
 ## Current structure
 
 - `apps/web`: Next.js application for the public website and product experiences.
+- `apps/scanner`: authenticated, provider-portable ClamAV scanning service for quarantined uploads.
 - `packages/ui`: shared presentational components.
 - `docs`: product and technical decisions.
 
@@ -14,7 +15,7 @@ Database changes are migration-first under `supabase/migrations/`. Every tenant-
 
 CI runs the application quality gates separately from a disposable local Supabase stack. The application job enforces type checking, linting, unit tests, a production build, and a high-severity production-dependency audit. The database job rebuilds the schema from migrations and seed data, runs pgTAP tenant-policy tests, and applies database linting. Workflow permissions are read-only, checkout credentials are not persisted, jobs have bounded runtimes, and superseded runs on the same branch are cancelled.
 
-Production uses Vercel for the Next.js application and a dedicated Supabase project for Auth and PostgreSQL. Public deployment configuration is environment-driven. `/api/health` reports safe booleans for the canonical origin, Supabase, notification delivery, and document scanner. It returns HTTP 503 when any required production value is missing or still contains a documented placeholder, without making privileged requests or exposing credentials.
+Production uses Vercel for the Next.js application and a dedicated Supabase project for Auth and PostgreSQL. Public deployment configuration is environment-driven. Browser requests to the stable `qgritai.vercel.app` alias redirect to `qgritai.com` so authentication cookies and callbacks stay on one canonical origin; API workers remain directly callable. `/api/health` reports safe booleans for the canonical origin, Supabase, notification delivery, and document scanner. It returns HTTP 503 when any required production value is missing or still contains a documented placeholder, without making privileged requests or exposing credentials.
 
 Core future entities:
 
@@ -46,7 +47,7 @@ The service-role key must never be exposed to the browser. Public clients use on
 
 Email delivery uses a PostgreSQL outbox. Lead and proposal transitions enqueue notification intent, and a `CRON_SECRET`-protected server route atomically claims work with the narrowly scoped server-only service role. Provider requests use stable notification IDs as idempotency keys; failures are retained with bounded exponential retry state. The current delivery adapter targets Resend through its HTTPS API, while notification rendering remains isolated from the provider call.
 
-Client documents enter a private quarantine bucket with a 10 MB limit and explicit MIME allowlist. Object paths begin with the tenant organization UUID, and Storage RLS verifies membership for upload. Quarantined objects have no member read policy. A protected scanning worker claims metadata records atomically and sends bytes to an authenticated external malware-scanner service. Clean files are promoted to the private client bucket; rejected files remain unavailable and are removed from quarantine. Downloads require a clean metadata verdict and use signed URLs that expire after 60 seconds; public object URLs are never generated.
+Client documents enter a private quarantine bucket with a 10 MB limit and explicit MIME allowlist. Object paths begin with the tenant organization UUID, and Storage RLS verifies membership for upload. Quarantined objects have no member read policy. A protected scanning worker claims metadata records atomically and sends bytes to the bearer-authenticated service in `apps/scanner`. That service streams the raw bytes through ClamAV without persisting them and fails closed when the daemon is unavailable or its response is unknown. Clean files are promoted to the private client bucket; rejected files remain unavailable and are removed from quarantine. Downloads require a clean metadata verdict and use signed URLs that expire after 60 seconds; public object URLs are never generated.
 
 Support requests are tenant-owned threads. Messages inherit the request organization, validate that the parent request belongs to the same tenant, and expose sender profiles only through shared-organization profile policies. Request creators and delivery roles can manage status; all organization members can participate in the conversation.
 

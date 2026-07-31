@@ -1,6 +1,6 @@
 # Production deployment
 
-This runbook prepares a production Supabase project and deploys `apps/web` to Vercel. It does not require or permit committing credentials.
+This runbook prepares the production Supabase project, deploys `apps/web` to Vercel, and deploys the private document scanner. It does not require or permit committing credentials.
 
 ## 1. Create the Supabase production project
 
@@ -40,7 +40,19 @@ Use an exact callback path for production. Keep preview wildcards scoped to the 
 
 The service-role key is used only by protected background workers. It must remain server-only and must never use a `NEXT_PUBLIC_` prefix. Verify the sending domain with the email provider before enabling delivery. The repository defaults both Vercel Cron jobs to once daily so launch previews can run on the Hobby plan. A production service-level objective requires Vercel Pro schedules or an approved external scheduler that calls the same protected endpoints more frequently.
 
-## 3. Verify before traffic
+## 3. Deploy the private document scanner
+
+1. Choose a container host that supports TLS, at least 4 GB RAM, health checks, and preferably private ingress and persistent storage. Do not send customer files through a public multi-tenant scanning API without an approved data-processing agreement.
+2. Build the repository-root container context with `docker build -f apps/scanner/Dockerfile -t qgritai/document-scanner .` or configure the host with the same Dockerfile and root context.
+3. Generate a random secret of at least 32 bytes. Set it as `SCANNER_SECRET` on the scanner and as `DOCUMENT_SCANNER_SECRET` in Vercel. Never print it into logs or commit it.
+4. Mount persistent storage at `/var/lib/clamav` when the host supports it. The service downloads signatures before it reports healthy and refreshes them every six hours.
+5. Expose only port `8080` through authenticated TLS ingress. Never expose ClamAV port `3310` publicly.
+6. Set `DOCUMENT_SCANNER_URL=https://<scanner-host>/scan` in Vercel and redeploy the web application.
+7. Verify `https://<scanner-host>/health` returns HTTP 200. An unauthorized request to `/scan` must return HTTP 401.
+
+The scanner accepts the file as the raw POST body, enforces the same 10 MB ceiling as the web application, and returns only a bounded verdict. See `apps/scanner/README.md` for the complete contract and runtime settings.
+
+## 4. Verify before traffic
 
 - Confirm `/api/health` returns HTTP 200 with `status: "ok"` and all four safe configuration checks set to `true`: canonical site URL, Supabase, notifications, and document scanner. A missing or placeholder value returns HTTP 503 without exposing the value.
 - Confirm `/robots.txt` references the production sitemap and disallows private, administrative, authentication, and API paths.

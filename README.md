@@ -15,6 +15,7 @@ This is the first consolidated, maintainable application foundation for QgritAI.
 - Product, architecture, and roadmap documentation.
 - GitHub Actions CI configuration.
 - Production deployment runbook and health endpoint.
+- Private ClamAV document-scanner service and container definition.
 
 ## Run locally
 
@@ -45,8 +46,8 @@ Run database policy tests with `pnpm db:test` and database linting with `pnpm db
 
 ## Production deployment
 
-Follow [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md) to provision Supabase, configure authentication redirects, and import this pnpm monorepo into Vercel. Production credentials belong in the hosting providers, never in this repository.
+The production Supabase project, Vercel application, email domain, and `qgritai.com` custom domain are configured. Follow [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md) for the reproducible setup and remaining scanner deployment and launch verification. Production credentials belong in the hosting providers, never in this repository.
 
 ## Important boundary
 
-Authentication, organization onboarding, tenant isolation, persisted tools, engagement workflows, and private tenant-scoped document quarantine are implemented through Supabase. Cloud resources still require provisioning with the deployment runbook. The malware-scanner service must be provisioned and verified before accepting untrusted production documents.
+Authentication, organization onboarding, tenant isolation, persisted tools, engagement workflows, and private tenant-scoped document quarantine are implemented through Supabase. The private scanner service is implemented under `apps/scanner`, but it must be deployed and verified before accepting untrusted production documents.

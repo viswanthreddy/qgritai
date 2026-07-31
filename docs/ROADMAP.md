@@ -18,7 +18,8 @@
 - [x] Persisted readiness assessments and ROI scenarios.
 - [x] Full engagement, action, and decision editing workflows.
 - [x] Repository-side Supabase and Vercel deployment configuration.
-- [ ] Provision production Supabase and Vercel projects and complete the deployment verification runbook.
+- [x] Provision production Supabase and Vercel projects and connect the production domain.
+- [ ] Complete the production deployment verification runbook.
 
 ## Milestone 9 — Lead and consulting workflow
 
@@ -27,7 +28,7 @@
 - [x] Internal opportunity pipeline foundation.
 - [x] Discovery notes and proposal workflow foundation.
 - [x] Auditable email notification outbox and delivery worker.
-- [ ] Configure and verify the production sending domain and email-provider credentials.
+- [x] Configure and verify the production sending domain and email-provider credentials.
 
 ## Milestone 10 — Production client portal
 
@@ -40,5 +41,6 @@
 
 - [x] Immutable tenant audit events and governance activity view.
 - [x] Document malware quarantine and scanner integration boundary.
+- [x] Private ClamAV scanner service and container definition.
 - [ ] Provision and validate the production malware-scanner service.
 - [ ] Production infrastructure provisioning and operational verification.
