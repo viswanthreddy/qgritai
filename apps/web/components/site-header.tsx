@@ -17,7 +17,7 @@ export function SiteHeader() {
     <Link className="brand" href="/"><span className="brand-mark">Q</span><span>QgritAI</span></Link>
     <nav className={open ? "nav-links open" : "nav-links"} aria-label="Primary navigation">
       {links.map(([label, href]) => <a key={label} href={href} onClick={() => setOpen(false)}>{label}</a>)}
-      <a className="button button-small" href="mailto:hello@qgritai.com">Start a conversation</a>
+      <a className="button button-small" href="/contact">Start a conversation</a>
     </nav>
     <button className="menu-button" onClick={() => setOpen(!open)} aria-expanded={open} aria-label="Toggle menu">{open ? <X/> : <Menu/>}</button>
   </div></header>;

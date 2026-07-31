@@ -26,6 +26,36 @@ export async function saveReadiness(formData: FormData) {
   redirect("/readiness?saved=true");
 }
 
+const readinessLeadSchema = z.object({
+  fullName: z.string().trim().min(2).max(120),
+  workEmail: z.string().trim().email().max(320),
+  company: z.string().trim().min(2).max(160),
+  jobTitle: z.string().trim().max(160),
+  message: z.string().trim().min(20).max(3000),
+  website: z.string().max(0),
+});
+
+export async function submitReadinessLead(formData: FormData) {
+  const parsed = readinessLeadSchema.safeParse(Object.fromEntries(formData));
+  const scores = readinessDimensions.map(dimension => Number(formData.get(dimension)));
+  if (!parsed.success || scores.some(score => !Number.isInteger(score) || score < 1 || score > 5)) {
+    redirect("/readiness?error=Please%20review%20the%20required%20fields.");
+  }
+  const result = calculateReadiness(scores);
+  const supabase = await createClient();
+  const { error } = await supabase.rpc("submit_readiness_lead", {
+    full_name: parsed.data.fullName,
+    work_email: parsed.data.workEmail,
+    company: parsed.data.company,
+    job_title: parsed.data.jobTitle,
+    message: parsed.data.message,
+    readiness_score: result.total,
+    readiness_label: result.label,
+  });
+  if (error) redirect("/readiness?error=We%20could%20not%20submit%20your%20request.%20Please%20try%20again.");
+  redirect("/readiness/received");
+}
+
 const roiSchema = z.object({
   people: z.coerce.number().int().positive(),
   weeklyHours: z.coerce.number().nonnegative(),

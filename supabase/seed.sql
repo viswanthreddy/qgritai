@@ -11,6 +11,7 @@ insert into public.organizations (id, name, slug, join_code, created_by)
 values ('22222222-2222-4222-8222-222222222222', 'QgritAI Demo Client', 'qgritai-demo-client', 'QGRIT-DEMO-2026', '11111111-1111-4111-8111-111111111111') on conflict (id) do nothing;
 insert into public.organization_members (organization_id, user_id, role)
 values ('22222222-2222-4222-8222-222222222222', '11111111-1111-4111-8111-111111111111', 'owner') on conflict do nothing;
+update public.profiles set platform_role = 'admin' where id = '11111111-1111-4111-8111-111111111111';
 insert into public.engagements (id, organization_id, name, description, status, progress, created_by)
 values ('33333333-3333-4333-8333-333333333333', '22222222-2222-4222-8222-222222222222', 'Service Operations AI Pilot', 'Validate a focused service-intake workflow.', 'active', 68, '11111111-1111-4111-8111-111111111111') on conflict (id) do nothing;
 insert into public.actions (organization_id, engagement_id, title, status, created_by)
@@ -18,3 +19,6 @@ values
   ('22222222-2222-4222-8222-222222222222', '33333333-3333-4333-8333-333333333333', 'Confirm service-intake pilot scope', 'complete', '11111111-1111-4111-8111-111111111111'),
   ('22222222-2222-4222-8222-222222222222', '33333333-3333-4333-8333-333333333333', 'Approve CRM sandbox access', 'open', '11111111-1111-4111-8111-111111111111'),
   ('22222222-2222-4222-8222-222222222222', '33333333-3333-4333-8333-333333333333', 'Review value-measurement baseline', 'in_progress', '11111111-1111-4111-8111-111111111111');
+
+insert into public.leads (full_name, work_email, company, job_title, message, source)
+values ('Maya Chen', 'maya@example.test', 'Northstar Operations', 'VP Operations', 'We want to prioritize service workflows for a controlled AI pilot.', 'contact');

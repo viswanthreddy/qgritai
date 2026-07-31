@@ -14,6 +14,7 @@ This is the first consolidated, maintainable application foundation for QgritAI.
 - Functional browser-only client workspace.
 - Product, architecture, and roadmap documentation.
 - GitHub Actions CI configuration.
+- Production deployment runbook and health endpoint.
 
 ## Run locally
 
@@ -42,6 +43,10 @@ Database changes live in `supabase/migrations/`, and local-only sample records l
 
 Run database policy tests with `pnpm db:test` and database linting with `pnpm db:lint` while the local stack is running.
 
+## Production deployment
+
+Follow [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md) to provision Supabase, configure authentication redirects, and import this pnpm monorepo into Vercel. Production credentials belong in the hosting providers, never in this repository.
+
 ## Important boundary
 
-Authentication, organization onboarding, tenant isolation, and persistence for readiness assessments and ROI scenarios are implemented through Supabase. Secure file storage, production deployment configuration, and broader client-workspace editing remain future work.
+Authentication, organization onboarding, tenant isolation, persisted tools, engagement workflows, and private tenant-scoped document quarantine are implemented through Supabase. Cloud resources still require provisioning with the deployment runbook. The malware-scanner service must be provisioned and verified before accepting untrusted production documents.
