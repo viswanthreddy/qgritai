@@ -1,0 +1,11 @@
+"use client";
+import { useMemo, useState } from "react";
+import { SiteHeader } from "@/components/site-header";
+import { Footer } from "@/components/footer";
+import { calculateRoi } from "@/lib/calculations";
+import { saveRoiScenario } from "@/app/tools/actions";
+export default function ROI() {
+ const [people,setPeople]=useState(20), [hours,setHours]=useState(6), [rate,setRate]=useState(1500), [automation,setAutomation]=useState(40), [cost,setCost]=useState(2500000);
+ const result=useMemo(()=>calculateRoi({people,weeklyHours:hours,hourlyCost:rate,automationPercent:automation,implementationCost:cost}),[people,hours,rate,automation,cost]);
+ return <><SiteHeader/><main className="tool-page shell"><span className="kicker">ROI Studio</span><h1>Build a directional business case for automation.</h1><p className="lede">Use this model for early prioritization—not as a guaranteed financial forecast. Sign in to save scenarios.</p><section className="tool-grid"><form className="panel form-grid" action={saveRoiScenario}><label>People involved<input name="people" type="number" min="1" value={people} onChange={e=>setPeople(Number(e.target.value))}/></label><label>Manual hours per person/week<input name="weeklyHours" type="number" min="0" value={hours} onChange={e=>setHours(Number(e.target.value))}/></label><label>Loaded hourly cost (₹)<input name="hourlyCost" type="number" min="0" value={rate} onChange={e=>setRate(Number(e.target.value))}/></label><label>Estimated automation potential (%)<input name="automationPercent" type="number" min="0" max="100" value={automation} onChange={e=>setAutomation(Number(e.target.value))}/></label><label>Implementation investment (₹)<input name="implementationCost" type="number" min="0" value={cost} onChange={e=>setCost(Number(e.target.value))}/></label><button className="button">Save scenario</button></form><aside className="score-card roi-results"><span>Estimated annual capacity value</span><strong>₹{Math.round(result.annualValue).toLocaleString("en-IN")}</strong><div><b>{Math.round(result.annualHours).toLocaleString("en-IN")}</b><small>hours returned annually</small></div><div><b>{result.payback.toFixed(1)} months</b><small>directional payback</small></div><div><b>{Math.round(result.roi)}%</b><small>year-one directional ROI</small></div></aside></section></main><Footer/></>;
+}

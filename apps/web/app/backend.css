@@ -1,0 +1,42 @@
+.auth-page { min-height: 70vh; }
+.auth-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; margin-top: 36px; }
+.auth-form { display: flex; flex-direction: column; gap: 18px; }
+.auth-form h2 { margin: 0; }
+.auth-form label { display: grid; gap: 8px; color: var(--muted); }
+.auth-form input { width: 100%; padding: 14px 16px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); color: var(--text); font: inherit; }
+.auth-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+.auth-notice { margin-top: 32px; }
+.form-error { color: #ff9c9c; }
+.form-success { color: #80e1bd; }
+.auth-page code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+.action-list .action { cursor: default; }
+@media (max-width: 800px) { .auth-grid { grid-template-columns: 1fr; } }
+
+.workspace-create summary { cursor: pointer; font-weight: 800; }
+.workspace-create[open] summary { margin-bottom: 20px; }
+.workspace-form { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin-top: 20px; }
+.workspace-form.compact { padding: 18px 0; border-bottom: 1px solid var(--line); margin-bottom: 18px; }
+.workspace-form label { display: grid; gap: 7px; color: var(--muted); font-size: 13px; }
+.workspace-form input,
+.workspace-form select,
+.workspace-form textarea,
+.action select,
+.record-list select { width: 100%; border: 1px solid var(--line); border-radius: 11px; background: #09140f; color: var(--text); padding: 11px 12px; }
+.workspace-form textarea { resize: vertical; }
+.workspace-form .form-wide { grid-column: 1 / -1; }
+.workspace-form .button { width: max-content; }
+.action { justify-content: space-between; }
+.action > span { flex: 1; }
+.action form { display: flex; align-items: center; gap: 8px; min-width: 215px; }
+.text-button { border: 0; background: transparent; color: var(--accent); font-weight: 800; cursor: pointer; }
+.record-list { display: grid; gap: 10px; }
+.record-list article { display: grid; grid-template-columns: 1fr auto; gap: 12px; padding: 16px; border: 1px solid var(--line); border-radius: 14px; background: rgba(255,255,255,.025); }
+.record-list article p { margin: 5px 0 0; }
+.record-list article form { grid-column: 1 / -1; display: flex; gap: 8px; align-items: center; }
+.status-label { height: max-content; padding: 4px 9px; border-radius: 999px; background: rgba(142,255,193,.1); color: var(--accent); font-size: 11px; text-transform: uppercase; }
+@media (max-width: 800px) {
+  .workspace-form { grid-template-columns: 1fr; }
+  .workspace-form .form-wide { grid-column: auto; }
+  .action { align-items: flex-start; flex-direction: column; }
+  .action form { width: 100%; min-width: 0; }
+}
