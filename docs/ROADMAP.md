@@ -16,19 +16,29 @@
 - [x] Organization model and onboarding.
 - [x] Database migrations and Row Level Security.
 - [x] Persisted readiness assessments and ROI scenarios.
-- [ ] Full engagement, action, and decision editing workflows.
-- [ ] Production Supabase project and deployment configuration.
+- [x] Full engagement, action, and decision editing workflows.
+- [x] Repository-side Supabase and Vercel deployment configuration.
+- [ ] Provision production Supabase and Vercel projects and complete the deployment verification runbook.
 
 ## Milestone 9 — Lead and consulting workflow
 
-- Contact and assessment lead capture.
-- Internal opportunity pipeline.
-- Discovery notes and proposal workflow.
-- Email notifications.
+- [x] Contact lead capture.
+- [x] Assessment lead capture.
+- [x] Internal opportunity pipeline foundation.
+- [x] Discovery notes and proposal workflow foundation.
+- [x] Auditable email notification outbox and delivery worker.
+- [ ] Configure and verify the production sending domain and email-provider credentials.
 
 ## Milestone 10 — Production client portal
 
-- Secure document storage.
-- Role-based access.
-- Support requests and messaging.
-- Value and adoption reporting.
+- [x] Secure document storage foundation.
+- [x] Role-based access and membership management foundation.
+- [x] Support requests and tenant messaging.
+- [x] Value and adoption reporting foundation.
+
+## Milestone 11 — Operational hardening
+
+- [x] Immutable tenant audit events and governance activity view.
+- [x] Document malware quarantine and scanner integration boundary.
+- [ ] Provision and validate the production malware-scanner service.
+- [ ] Production infrastructure provisioning and operational verification.
