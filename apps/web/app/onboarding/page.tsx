@@ -1,8 +1,14 @@
 import { redirect } from "next/navigation";
+import type { Metadata } from "next";
 import { Footer } from "@/components/footer";
 import { SiteHeader } from "@/components/site-header";
 import { createClient } from "@/lib/supabase/server";
 import { createOrganization, joinOrganization } from "./actions";
+
+export const metadata: Metadata = {
+  title: "Organization setup",
+  robots: { index: false, follow: false },
+};
 
 export default async function Onboarding({ searchParams }: { searchParams: Promise<{ error?: string }> }) {
   const supabase = await createClient();
