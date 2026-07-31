@@ -42,7 +42,7 @@ The service-role key is used only by the protected notification dispatcher. It m
 
 ## 3. Verify before traffic
 
-- Confirm `/api/health` returns HTTP 200 with `{ "status": "ok" }`.
+- Confirm `/api/health` returns HTTP 200 with `status: "ok"` and all four safe configuration checks set to `true`: canonical site URL, Supabase, notifications, and document scanner. A missing or placeholder value returns HTTP 503 without exposing the value.
 - Confirm `/robots.txt` references the production sitemap and disallows private, administrative, authentication, and API paths.
 - Confirm `/sitemap.xml` contains only the public homepage, contact, readiness, and ROI routes under the canonical production origin.
 - Trigger `/api/cron/notifications` with the configured bearer secret and verify both internal lead alerts and client proposal notices, including retry and idempotency behavior.

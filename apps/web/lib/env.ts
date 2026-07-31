@@ -1,8 +1,13 @@
 import { z } from "zod";
 
+const configuredString = (minimumLength: number) => z.string().min(minimumLength).refine(
+  value => !value.startsWith("replace-with-"),
+  "A real configured value is required.",
+);
+
 const publicEnvSchema = z.object({
   NEXT_PUBLIC_SUPABASE_URL: z.string().url(),
-  NEXT_PUBLIC_SUPABASE_ANON_KEY: z.string().min(1),
+  NEXT_PUBLIC_SUPABASE_ANON_KEY: configuredString(20),
 });
 
 export function getSupabaseEnv() {
@@ -20,19 +25,33 @@ export function isSupabaseConfigured() {
 }
 
 const notificationEnvSchema = z.object({
-  SUPABASE_SERVICE_ROLE_KEY: z.string().min(1),
-  RESEND_API_KEY: z.string().min(1),
+  SUPABASE_SERVICE_ROLE_KEY: configuredString(20),
+  RESEND_API_KEY: configuredString(10),
   EMAIL_FROM: z.string().min(3),
   CONTACT_NOTIFICATION_TO: z.string().email(),
-  CRON_SECRET: z.string().min(16),
+  CRON_SECRET: configuredString(16),
 });
 
 const documentScannerEnvSchema = z.object({
-  SUPABASE_SERVICE_ROLE_KEY: z.string().min(1),
-  CRON_SECRET: z.string().min(16),
+  SUPABASE_SERVICE_ROLE_KEY: configuredString(20),
+  CRON_SECRET: configuredString(16),
   DOCUMENT_SCANNER_URL: z.string().url(),
-  DOCUMENT_SCANNER_SECRET: z.string().min(16),
+  DOCUMENT_SCANNER_SECRET: configuredString(16),
 });
+
+const productionSiteUrlSchema = z.string().url().refine(value => value.startsWith("https://"), "Production site URL must use HTTPS.");
+
+type PlatformEnvironment = Readonly<Record<string, string | undefined>>;
+
+export function getPlatformConfiguration(environment: PlatformEnvironment = process.env) {
+  const checks = {
+    canonicalSiteUrl: productionSiteUrlSchema.safeParse(environment.NEXT_PUBLIC_SITE_URL).success,
+    supabase: publicEnvSchema.safeParse(environment).success,
+    notifications: notificationEnvSchema.safeParse(environment).success,
+    documentScanner: documentScannerEnvSchema.safeParse(environment).success,
+  };
+  return { ready: Object.values(checks).every(Boolean), checks };
+}
 
 export function getNotificationEnv() {
   return notificationEnvSchema.parse({
