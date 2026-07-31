@@ -8,7 +8,7 @@ const validEnvironment = {
   SUPABASE_SERVICE_ROLE_KEY: "server-only-service-role-key-with-sufficient-length",
   RESEND_API_KEY: "re_valid_api_key",
   EMAIL_FROM: "QgritAI <notifications@qgritai.com>",
-  CONTACT_NOTIFICATION_TO: "hello@qgritai.com",
+  CONTACT_NOTIFICATION_TO: "info@qgritai.com",
   CRON_SECRET: "a-strong-cron-secret-value",
   DOCUMENT_SCANNER_URL: "https://scanner.internal.example/scan",
   DOCUMENT_SCANNER_SECRET: "a-strong-scanner-secret-value",
