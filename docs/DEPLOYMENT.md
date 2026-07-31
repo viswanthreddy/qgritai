@@ -38,7 +38,7 @@ Use an exact callback path for production. Keep preview wildcards scoped to the 
 
 5. Configure the Supabase URL and key for Preview only when previews should use a non-production Supabase environment. Never connect untrusted preview code to production customer data.
 
-The service-role key is used only by the protected notification dispatcher. It must remain server-only and must never use a `NEXT_PUBLIC_` prefix. Verify the sending domain with the email provider before enabling delivery. The included Vercel Cron schedule runs every five minutes and therefore requires a plan that supports sub-daily Cron Jobs; otherwise replace it with an approved scheduler that calls the same protected endpoint.
+The service-role key is used only by protected background workers. It must remain server-only and must never use a `NEXT_PUBLIC_` prefix. Verify the sending domain with the email provider before enabling delivery. The repository defaults both Vercel Cron jobs to once daily so launch previews can run on the Hobby plan. A production service-level objective requires Vercel Pro schedules or an approved external scheduler that calls the same protected endpoints more frequently.
 
 ## 3. Verify before traffic
 
