@@ -12,7 +12,7 @@ The application uses Supabase Auth and PostgreSQL. Browser and server clients us
 
 Database changes are migration-first under `supabase/migrations/`. Every tenant-owned table contains an `organization_id` and has Row Level Security enabled. Security-definer helper functions perform membership checks without recursive membership policies. Organization creation and code-based joining are exposed only as authenticated database functions.
 
-CI runs the application quality gates separately from a disposable local Supabase stack. The database job rebuilds the schema from migrations and seed data, runs pgTAP tenant-policy tests, and applies database linting.
+CI runs the application quality gates separately from a disposable local Supabase stack. The application job enforces type checking, linting, unit tests, a production build, and a high-severity production-dependency audit. The database job rebuilds the schema from migrations and seed data, runs pgTAP tenant-policy tests, and applies database linting. Workflow permissions are read-only, checkout credentials are not persisted, jobs have bounded runtimes, and superseded runs on the same branch are cancelled.
 
 Production uses Vercel for the Next.js application and a dedicated Supabase project for Auth and PostgreSQL. Public deployment configuration is environment-driven. `/api/health` reports whether required public Supabase configuration is present without making a privileged request or exposing credentials.
 
