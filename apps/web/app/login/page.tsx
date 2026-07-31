@@ -1,9 +1,15 @@
 import { redirect } from "next/navigation";
+import type { Metadata } from "next";
 import { Footer } from "@/components/footer";
 import { SiteHeader } from "@/components/site-header";
 import { isSupabaseConfigured } from "@/lib/env";
 import { createClient } from "@/lib/supabase/server";
 import { sendMagicLink, signIn, signUp } from "@/app/auth/actions";
+
+export const metadata: Metadata = {
+  title: "Sign in",
+  robots: { index: false, follow: false },
+};
 
 export default async function Login({ searchParams }: { searchParams: Promise<{ error?: string; message?: string }> }) {
   const params = await searchParams;

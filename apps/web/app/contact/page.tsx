@@ -2,7 +2,10 @@ import { Footer } from "@/components/footer";
 import { SiteHeader } from "@/components/site-header";
 import { submitContact } from "./actions";
 
-export const metadata = { title: "Start a conversation | QgritAI" };
+export const metadata = {
+  title: "Start a conversation",
+  description: "Discuss an enterprise AI workflow, constraint, or opportunity with QgritAI.",
+};
 
 export default async function Contact({ searchParams }: { searchParams: Promise<{ submitted?: string; error?: string }> }) {
   const { submitted, error } = await searchParams;
