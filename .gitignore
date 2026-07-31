@@ -4,8 +4,10 @@ node_modules
 .turbo
 .env
 .env.local
+.vercel
 .DS_Store
 coverage
 *.tsbuildinfo
 supabase/.branches
 supabase/.temp
+.env*
