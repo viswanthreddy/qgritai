@@ -8,5 +8,5 @@ export const metadata = {
 };
 
 export default function ReadinessReceived() {
-  return <><SiteHeader/><main className="tool-page shell"><section className="panel submission-confirmation"><span className="kicker">Result received</span><h1>Thank you for sharing your readiness context.</h1><p className="lede">Your assessment has been added to the QgritAI opportunity queue. The next conversation will focus on evidence, constraints, and a practical first workflow.</p><ButtonLink href="/">Return home</ButtonLink></section></main><Footer/></>;
+  return <><SiteHeader/><main className="tool-page shell"><section className="panel submission-confirmation"><span className="kicker">Result received</span><h1>Thank you for sharing your readiness context.</h1><p className="lede">Your assessment has been added to the QGRITAI opportunity queue. The next conversation will focus on evidence, constraints, and a practical first workflow.</p><ButtonLink href="/">Return home</ButtonLink></section></main><Footer/></>;
 }

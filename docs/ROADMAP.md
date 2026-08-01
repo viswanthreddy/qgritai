@@ -1,44 +1,37 @@
 # Delivery Roadmap
 
-## Milestone 7 — Core application foundation
+## Phase 1 — Service-led public launch
 
-- Next.js monorepo.
-- Shared UI package.
-- Marketing homepage.
-- AI Readiness Assessment.
-- ROI Studio.
-- Interactive client workspace prototype.
+- [x] Founder-led, agent-powered company positioning.
+- [x] Services, industries, representative work, insights, tools, and about journeys.
+- [x] AI Readiness Assessment and Automation ROI Studio.
+- [x] Validated contact and assessment lead capture.
+- [x] Production Supabase, Resend notification delivery, Vercel, and custom domain foundation.
+- [x] Baseline privacy, terms, accessibility, and security information.
+- [ ] Final editorial, professional legal/accessibility, analytics-consent, and production smoke review.
+- [ ] Configure Supabase Auth SMTP only if public email authentication is reintroduced.
 
-## Milestone 8 — Backend foundation
+## Phase 2 — Agent-powered delivery system
 
-- [x] Supabase project configuration.
-- [x] Email/password and magic-link authentication foundation.
-- [x] Organization model and onboarding.
-- [x] Database migrations and Row Level Security.
-- [x] Persisted readiness assessments and ROI scenarios.
-- [x] Full engagement, action, and decision editing workflows.
-- [x] Repository-side Supabase and Vercel deployment configuration.
-- [ ] Provision production Supabase and Vercel projects and complete the deployment verification runbook.
+- [ ] Standardize opportunity sprint, proof-of-value, implementation, and managed-operations playbooks.
+- [ ] Define specialist agent responsibilities for research, strategy, architecture, engineering, assurance, documentation, and operations.
+- [ ] Add founder approval gates, evaluation evidence, auditability, and secure client-data handling.
+- [ ] Build reusable workflow, integration, knowledge, and evaluation components from real engagements.
+- [ ] Instrument delivery speed, quality, cost, adoption, and realized business outcomes.
 
-## Milestone 9 — Lead and consulting workflow
+## Phase 3 — Evidence-led expansion
 
-- [x] Contact lead capture.
-- [x] Assessment lead capture.
-- [x] Internal opportunity pipeline foundation.
-- [x] Discovery notes and proposal workflow foundation.
-- [x] Auditable email notification outbox and delivery worker.
-- [ ] Configure and verify the production sending domain and email-provider credentials.
+- [ ] Publish verified case studies only with evidence and client permission.
+- [ ] Develop focused industry offerings where repeated workflow patterns emerge.
+- [ ] Introduce recurring managed AI operations and optimization services.
+- [ ] Expose lightweight client reporting or approvals only when engagements demonstrate demand.
+- [ ] Consider standalone software products only where the same validated need repeats across customers.
 
-## Milestone 10 — Production client portal
+## Retained, not launch-critical
 
-- [x] Secure document storage foundation.
-- [x] Role-based access and membership management foundation.
-- [x] Support requests and tenant messaging.
-- [x] Value and adoption reporting foundation.
+- Supabase authentication and organization membership.
+- Tenant-isolated workspace, engagement, action, and decision workflows.
+- Secure document, support, value-reporting, and audit foundations.
+- Internal opportunity pipeline, discovery notes, and proposal workflows.
 
-## Milestone 11 — Operational hardening
-
-- [x] Immutable tenant audit events and governance activity view.
-- [x] Document malware quarantine and scanner integration boundary.
-- [ ] Provision and validate the production malware-scanner service.
-- [ ] Production infrastructure provisioning and operational verification.
+These capabilities remain in the repository but are not part of the public service proposition. Malware scanning and production Auth SMTP are required only before the corresponding private portal capabilities are enabled for real clients.

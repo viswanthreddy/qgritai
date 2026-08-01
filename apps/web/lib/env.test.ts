@@ -15,7 +15,7 @@ const validEnvironment = {
 };
 
 describe("getPlatformConfiguration", () => {
-  it("reports ready only when every production integration is configured", () => {
+  it("reports ready when every public service integration is configured", () => {
     expect(getPlatformConfiguration(validEnvironment)).toEqual({
       ready: true,
       checks: { canonicalSiteUrl: true, supabase: true, notifications: true, documentScanner: true },
@@ -37,9 +37,9 @@ describe("getPlatformConfiguration", () => {
     expect(result.checks.canonicalSiteUrl).toBe(false);
   });
 
-  it("identifies a missing scanner without exposing configuration values", () => {
+  it("reports the optional private scanner without blocking the public website", () => {
     expect(getPlatformConfiguration({ ...validEnvironment, DOCUMENT_SCANNER_SECRET: undefined })).toEqual({
-      ready: false,
+      ready: true,
       checks: { canonicalSiteUrl: true, supabase: true, notifications: true, documentScanner: false },
     });
   });

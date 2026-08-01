@@ -1,0 +1,14 @@
+import { PolicyPage } from "@/components/policy-page";
+
+export const metadata = { title: "Privacy", description: "How QGRITAI collects, uses, protects, and manages information submitted through its website and services." };
+
+export default function PrivacyPage() {
+  return <PolicyPage eyebrow="Trust" title="Privacy policy" introduction="This policy explains the information QGRITAI collects through this website, why it is used, and the choices available to you." sections={[
+    { title: "Information we collect", paragraphs: ["When you contact QGRITAI or submit an assessment, we may collect your name, work email, company, job title, message, assessment responses, and related business context. Hosting and security providers may also process basic technical information such as IP address, browser type, request timestamps, and diagnostic logs."], items: ["Information you submit directly", "Assessment and enquiry context", "Essential hosting, security, and diagnostic data"] },
+    { title: "How information is used", paragraphs: ["Information is used to respond to enquiries, understand potential engagements, provide requested services, protect the website, diagnose problems, maintain business records, and comply with applicable obligations. QGRITAI does not sell personal information."], items: ["Responding to and qualifying enquiries", "Delivering and improving requested services", "Security, fraud prevention, and operational reliability", "Legal and record-keeping obligations"] },
+    { title: "Service providers and international processing", paragraphs: ["QGRITAI uses specialist providers for hosting, database services, and email delivery, including Vercel, Supabase, and Resend. These providers may process information in countries other than your own under their contractual and security arrangements." ] },
+    { title: "Retention and protection", paragraphs: ["Information is retained only for as long as reasonably needed for the purpose it was collected, legitimate business records, security, dispute resolution, or legal requirements. QGRITAI applies access controls and technical safeguards appropriate to the nature of the information, but no internet service can guarantee absolute security."] },
+    { title: "Your choices", paragraphs: ["You may ask to access, correct, or delete personal information held by QGRITAI, subject to applicable law and legitimate retention requirements. You may also ask questions about processing or withdraw from non-essential communications."] },
+    { title: "Cookies and analytics", paragraphs: ["The current public website uses essential technical mechanisms needed to provide and protect the service. Non-essential analytics or advertising technologies should not be introduced without an appropriate notice and consent mechanism where required."] },
+  ]}/>;
+}
