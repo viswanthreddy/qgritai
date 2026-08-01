@@ -5,21 +5,21 @@ import "./backend.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL(getSiteUrl()),
-  applicationName: "QgritAI",
+  applicationName: "QGRITAI",
   title: {
-    default: "QgritAI | Founder-led, agent-powered AI transformation",
-    template: "%s | QgritAI",
+    default: "QGRITAI | Founder-led, agent-powered AI transformation",
+    template: "%s | QGRITAI",
   },
-  description: "QgritAI helps businesses understand, build, and operate practical AI agents, automations, and intelligent systems through a founder-led, agent-powered delivery model.",
+  description: "QGRITAI helps businesses understand, build, and operate practical AI agents, automations, and intelligent systems through a founder-led, agent-powered delivery model.",
   openGraph: {
     type: "website",
-    siteName: "QgritAI",
-    title: "QgritAI | Founder-led, agent-powered AI transformation",
+    siteName: "QGRITAI",
+    title: "QGRITAI | Founder-led, agent-powered AI transformation",
     description: "Strategy, automation, agents, applications, and managed AI operations for real business work.",
   },
   twitter: {
     card: "summary",
-    title: "QgritAI | Founder-led, agent-powered AI transformation",
+    title: "QGRITAI | Founder-led, agent-powered AI transformation",
     description: "Strategy, automation, agents, applications, and managed AI operations for real business work.",
   },
 };

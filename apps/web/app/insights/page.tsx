@@ -2,7 +2,7 @@ import { CallToAction, PageHero } from "@/components/marketing";
 import { Footer } from "@/components/footer";
 import { SiteHeader } from "@/components/site-header";
 
-export const metadata = { title: "AI transformation insights", description: "Practical perspectives from QgritAI on agentic delivery, workflow automation, adoption, governance, and measurable AI value." };
+export const metadata = { title: "AI transformation insights", description: "Practical perspectives from QGRITAI on agentic delivery, workflow automation, adoption, governance, and measurable AI value." };
 
 const insights = [
   { number: "01", topic: "Strategy", title: "Start with the workflow, not the model", body: "The model is rarely the whole solution. Useful AI begins with the work: the trigger, evidence, judgment, systems, exceptions, owner, and measurable definition of improvement." },
