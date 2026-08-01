@@ -14,7 +14,7 @@ Database changes are migration-first under `supabase/migrations/`. Every tenant-
 
 CI runs the application quality gates separately from a disposable local Supabase stack. The application job enforces type checking, linting, unit tests, a production build, and a high-severity production-dependency audit. The database job rebuilds the schema from migrations and seed data, runs pgTAP tenant-policy tests, and applies database linting. Workflow permissions are read-only, checkout credentials are not persisted, jobs have bounded runtimes, and superseded runs on the same branch are cancelled.
 
-Production uses Vercel for the Next.js application and a dedicated Supabase project for Auth and PostgreSQL. Public deployment configuration is environment-driven. `/api/health` reports safe booleans for the canonical origin, Supabase, notification delivery, and document scanner. It returns HTTP 503 when any required production value is missing or still contains a documented placeholder, without making privileged requests or exposing credentials.
+Production uses Vercel for the Next.js application and a dedicated Supabase project for lead capture and retained internal foundations. Public deployment configuration is environment-driven. `/api/health` reports safe booleans for the canonical origin, Supabase, notification delivery, and the optional private document scanner. Public readiness requires the first three; the scanner check is informational while the client portal remains outside launch scope. The endpoint does not make privileged requests or expose credentials.
 
 Core future entities:
 

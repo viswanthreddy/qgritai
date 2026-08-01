@@ -50,7 +50,8 @@ export function getPlatformConfiguration(environment: PlatformEnvironment = proc
     notifications: notificationEnvSchema.safeParse(environment).success,
     documentScanner: documentScannerEnvSchema.safeParse(environment).success,
   };
-  return { ready: Object.values(checks).every(Boolean), checks };
+  const ready = checks.canonicalSiteUrl && checks.supabase && checks.notifications;
+  return { ready, checks };
 }
 
 export function getNotificationEnv() {

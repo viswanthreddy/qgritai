@@ -33,8 +33,6 @@ Use an exact callback path for production. Keep preview wildcards scoped to the 
    - `EMAIL_FROM=QgritAI <notifications@<verified-domain>>`
    - `CONTACT_NOTIFICATION_TO=<internal-lead-recipient>`
    - `CRON_SECRET=<random-value-of-at-least-16-characters>`
-   - `DOCUMENT_SCANNER_URL=https://<private-scanner-service>/scan`
-   - `DOCUMENT_SCANNER_SECRET=<scanner-service-bearer-secret>`
 
 5. Configure the Supabase URL and key for Preview only when previews should use a non-production Supabase environment. Never connect untrusted preview code to production customer data.
 
@@ -42,11 +40,11 @@ The service-role key is used only by protected background workers. It must remai
 
 ## 3. Verify before traffic
 
-- Confirm `/api/health` returns HTTP 200 with `status: "ok"` and all four safe configuration checks set to `true`: canonical site URL, Supabase, notifications, and document scanner. A missing or placeholder value returns HTTP 503 without exposing the value.
+- Confirm `/api/health` returns HTTP 200 with `status: "ok"` and the canonical site URL, Supabase, and notification checks set to `true`. The document-scanner check may remain `false` while private document upload is outside the public launch scope.
 - Confirm `/robots.txt` references the production sitemap and disallows private, administrative, authentication, and API paths.
 - Confirm `/sitemap.xml` contains only the public homepage, contact, readiness, and ROI routes under the canonical production origin.
 - Trigger `/api/cron/notifications` with the configured bearer secret and verify both internal lead alerts and client proposal notices, including retry and idempotency behavior.
-- Upload known-clean and standard EICAR test files in a non-production verification environment, invoke `/api/cron/document-scan`, and confirm that only the clean object is promoted from `document-quarantine` to `client-documents`. Never use live malware for verification.
+- If private document upload is intentionally enabled later, configure `DOCUMENT_SCANNER_URL` and `DOCUMENT_SCANNER_SECRET`, then validate clean and standard EICAR files in a non-production environment before accepting client documents. Never use live malware for verification.
 - Sign up, confirm email if enabled, sign out, sign in with password, and sign in with a magic link.
 - Create two organizations with separate test users and verify neither can read or change the other's data.
 - Create and edit an engagement, action, decision, readiness assessment, ROI scenario, and support request.
