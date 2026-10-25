@@ -1,6 +1,6 @@
-# QgritAI
+# QGRITAI
 
-QgritAI is a founder-led, agent-powered AI transformation company. This repository contains its public services website, interactive opportunity tools, lead workflow, and retained internal product foundations.
+QGRITAI is a founder-led, agent-powered AI transformation company. This repository contains its public services website, interactive opportunity tools, lead workflow, and retained internal product foundations.
 
 ## Included
 
@@ -12,6 +12,7 @@ QgritAI is a founder-led, agent-powered AI transformation company. This reposito
 - Interactive AI Readiness Assessment.
 - Interactive ROI Studio.
 - Contact and assessment lead capture.
+- Careers listings and a secure application workflow with private resume handling.
 - Retained authenticated workspace and internal consulting workflow foundations, excluded from the public navigation.
 - Product, architecture, and roadmap documentation.
 - GitHub Actions CI configuration.
@@ -47,6 +48,10 @@ Run database policy tests with `pnpm db:test` and database linting with `pnpm db
 ## Production deployment
 
 The public site is deployed through Vercel and uses Supabase for validated lead capture. Follow [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md) for the reproducible configuration. Production credentials belong in the hosting providers, never in this repository.
+
+For a complete inventory of the application stack, managed services, security controls, GitHub Actions workflow, Vercel release process, and Codex-assisted engineering operations, see [`docs/TECHNOLOGY_STACK_AND_DELIVERY.md`](docs/TECHNOLOGY_STACK_AND_DELIVERY.md).
+
+To configure job applications, CAPTCHA, private resume uploads, and recruitment email delivery, follow [`docs/CAREERS_SETUP.md`](docs/CAREERS_SETUP.md).
 
 ## Important boundary
 

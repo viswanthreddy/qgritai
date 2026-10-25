@@ -39,6 +39,15 @@ const documentScannerEnvSchema = z.object({
   DOCUMENT_SCANNER_SECRET: configuredString(16),
 });
 
+const careersEnvSchema = z.object({
+  SUPABASE_SERVICE_ROLE_KEY: configuredString(20),
+  RESEND_API_KEY: configuredString(10),
+  EMAIL_FROM: z.string().min(3),
+  CAREERS_NOTIFICATION_TO: z.string().email(),
+  TURNSTILE_SECRET_KEY: configuredString(10),
+  CAREERS_UPLOAD_SIGNING_SECRET: configuredString(32),
+});
+
 const productionSiteUrlSchema = z.string().url().refine(value => value.startsWith("https://"), "Production site URL must use HTTPS.");
 
 type PlatformEnvironment = Readonly<Record<string, string | undefined>>;
@@ -70,5 +79,16 @@ export function getDocumentScannerEnv() {
     CRON_SECRET: process.env.CRON_SECRET,
     DOCUMENT_SCANNER_URL: process.env.DOCUMENT_SCANNER_URL,
     DOCUMENT_SCANNER_SECRET: process.env.DOCUMENT_SCANNER_SECRET,
+  });
+}
+
+export function getCareersEnv() {
+  return careersEnvSchema.parse({
+    SUPABASE_SERVICE_ROLE_KEY: process.env.SUPABASE_SERVICE_ROLE_KEY,
+    RESEND_API_KEY: process.env.RESEND_API_KEY,
+    EMAIL_FROM: process.env.EMAIL_FROM,
+    CAREERS_NOTIFICATION_TO: process.env.CAREERS_NOTIFICATION_TO,
+    TURNSTILE_SECRET_KEY: process.env.TURNSTILE_SECRET_KEY,
+    CAREERS_UPLOAD_SIGNING_SECRET: process.env.CAREERS_UPLOAD_SIGNING_SECRET,
   });
 }

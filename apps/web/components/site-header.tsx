@@ -11,6 +11,7 @@ const links = [
   ["AI Tools", "/tools"],
   ["Insights", "/insights"],
   ["About", "/about"],
+  ["Careers", "/careers"],
 ];
 
 export function SiteHeader() {

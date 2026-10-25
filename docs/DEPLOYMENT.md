@@ -32,6 +32,10 @@ Use an exact callback path for production. Keep preview wildcards scoped to the 
    - `RESEND_API_KEY=<server-only-email-api-key>`
    - `EMAIL_FROM=QgritAI <notifications@<verified-domain>>`
    - `CONTACT_NOTIFICATION_TO=<internal-lead-recipient>`
+   - `CAREERS_NOTIFICATION_TO=info@qgritai.com`
+   - `NEXT_PUBLIC_TURNSTILE_SITE_KEY=<cloudflare-turnstile-site-key>`
+   - `TURNSTILE_SECRET_KEY=<server-only-cloudflare-turnstile-secret>`
+   - `CAREERS_UPLOAD_SIGNING_SECRET=<random-value-of-at-least-32-characters>`
    - `CRON_SECRET=<random-value-of-at-least-16-characters>`
 
 5. Configure the Supabase URL and key for Preview only when previews should use a non-production Supabase environment. Never connect untrusted preview code to production customer data.
@@ -43,6 +47,7 @@ The service-role key is used only by protected background workers. It must remai
 - Confirm `/api/health` returns HTTP 200 with `status: "ok"` and the canonical site URL, Supabase, and notification checks set to `true`. The document-scanner check may remain `false` while private document upload is outside the public launch scope.
 - Confirm `/robots.txt` references the production sitemap and disallows private, administrative, authentication, and API paths.
 - Confirm `/sitemap.xml` contains only the public homepage, contact, readiness, and ROI routes under the canonical production origin.
+- Submit one Careers application and verify the internal email, reply-to address, attached resume, applicant confirmation, CAPTCHA, and temporary resume deletion. Follow [`CAREERS_SETUP.md`](CAREERS_SETUP.md).
 - Trigger `/api/cron/notifications` with the configured bearer secret and verify both internal lead alerts and client proposal notices, including retry and idempotency behavior.
 - If private document upload is intentionally enabled later, configure `DOCUMENT_SCANNER_URL` and `DOCUMENT_SCANNER_SECRET`, then validate clean and standard EICAR files in a non-production environment before accepting client documents. Never use live malware for verification.
 - Sign up, confirm email if enabled, sign out, sign in with password, and sign in with a magic link.
